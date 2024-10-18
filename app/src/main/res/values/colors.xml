@@ -5,5 +5,11 @@
 
     <color name="main_color">#FFFAB005</color>
     <color name="yellow1">#FFFFEC99</color>
-    <color name="yellow3">#FFF08C00</color>
+    <color name="yellow3">#FFFAB005</color>
+    <color name="yellow4">#FFF08C00</color>
+    <color name="yellow5">#FFE67700</color>
+
+    <color name="gray1">#FFF7F7F7</color>
+    <color name="gray2">#FFE5E5E5</color>
+    <color name="gray3">#FF9B9B9B</color>
 </resources>

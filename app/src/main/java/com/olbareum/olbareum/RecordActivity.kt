@@ -2,62 +2,137 @@ package com.olbareum.olbareum
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.olbareum.olbareum.databinding.ActivityRecordBinding
+import java.io.IOException
 
-class RecordActivity : AppCompatActivity() {
+class RecordActivity : AppCompatActivity(), OnTimerTickListener {
 
     companion object {
         private const val REQUEST_RECORD_AUDIO_CODE = 200
     }
 
+    private enum class State {
+        RELEASE, RECORDING, PLAYING
+    }
+
+    private lateinit var timer: Timer
+
     private lateinit var binding: ActivityRecordBinding
+    private var recorder: MediaRecorder? = null
+    private var filename: String = ""
+    private var state: State = State.RELEASE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecordBinding.inflate(layoutInflater)
-
-//        enableEdgeToEdge()
         setContentView(binding.root)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
+
+        filename = "${externalCacheDir?.absolutePath}/result.3gp"
+        timer = Timer(this)
 
         binding.recordButton.setOnClickListener {
-            when {
-                ContextCompat.checkSelfPermission(
-                    this,
-                    android.Manifest.permission.RECORD_AUDIO
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    // 실제로 녹음을 시작하면 됨
+            when (state) {
+                State.RELEASE -> {
+                    record()
                 }
 
-                ActivityCompat.shouldShowRequestPermissionRationale(
-                    this, android.Manifest.permission.RECORD_AUDIO
-                ) -> {
-                    showPermissionRationaleDialog()
-                }
-
-                else -> {
-                    ActivityCompat.requestPermissions(
-                        this,
-                        arrayOf(android.Manifest.permission.RECORD_AUDIO),
-                        REQUEST_RECORD_AUDIO_CODE
-                    )
+                State.RECORDING -> onRecord(false)
+                State.PLAYING -> {
                 }
             }
         }
+
+        binding.analyzeButton.isEnabled = false
+        binding.analyzeButton.alpha = 0.3f
+    }
+
+    private fun record() {
+        when {
+            ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.RECORD_AUDIO
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                // 녹음 시작
+                onRecord(true)
+            }
+
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                this, android.Manifest.permission.RECORD_AUDIO
+            ) -> {
+                showPermissionRationaleDialog()
+            }
+
+            else -> {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.RECORD_AUDIO),
+                    REQUEST_RECORD_AUDIO_CODE
+                )
+            }
+        }
+    }
+
+    private fun onRecord(start: Boolean) = if (start) startRecording() else stopRecording()
+
+    private fun startRecording() {
+        state = State.RECORDING
+
+        recorder = MediaRecorder(this).apply {
+            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setOutputFile(filename)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+
+            try {
+                prepare()
+            } catch (e: IOException) {
+                Log.e("testt", "prepare() failed $e")
+            }
+
+            start()
+        }
+
+        binding.waveformView.clearData()
+        timer.start()
+
+        binding.recordButton.setImageDrawable(
+            ContextCompat.getDrawable(
+                this, R.drawable.ic_stop
+            )
+        )
+
+        binding.analyzeButton.isEnabled = false
+        binding.analyzeButton.alpha = 0.3f
+    }
+
+    private fun stopRecording() {
+        recorder?.apply {
+            stop()
+            release()
+        }
+        recorder = null
+
+        timer.stop()
+
+        state = State.RELEASE
+
+        binding.recordButton.setImageDrawable(
+            ContextCompat.getDrawable(
+                this, R.drawable.ic_mic
+            )
+        )
+
+        binding.analyzeButton.isEnabled = true
+        binding.analyzeButton.alpha = 1.0f
     }
 
     private fun showPermissionRationaleDialog() {
@@ -72,7 +147,8 @@ class RecordActivity : AppCompatActivity() {
     }
 
     private fun showPermissionSettingDialog() {
-        AlertDialog.Builder(this).setMessage("녹음 권한을 켜주셔야 앱을 정상적으로 사용할 수 있습니다. 앱 설정 화면에서 권한을 허용해주세요.")
+        AlertDialog.Builder(this)
+            .setMessage("녹음 권한을 켜주셔야 앱을 정상적으로 사용할 수 있습니다. 앱 설정 화면에서 권한을 허용해주세요.")
             .setPositiveButton("권한 허용하러 가기") { _, _ ->
                 navigateToAppSetting()
             }.setNegativeButton("취소") { dialogInterface, _ -> dialogInterface.cancel() }.show()
@@ -96,7 +172,7 @@ class RecordActivity : AppCompatActivity() {
             requestCode == REQUEST_RECORD_AUDIO_CODE && grantResults.firstOrNull() == PackageManager.PERMISSION_GRANTED
 
         if (audioRecordPermissionGranted) {
-            // TODO: 녹음 작업을 시작함
+            onRecord(true)
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this,
@@ -108,5 +184,14 @@ class RecordActivity : AppCompatActivity() {
                 showPermissionSettingDialog()
             }
         }
+    }
+
+    override fun onTick(duration: Long) {
+        val millisecond = duration % 1000
+        val second = (duration / 1000) % 60
+        val minute = (duration / 1000 / 60)
+
+        binding.timerTextView.text = String.format("%02d:%02d.%02d", minute, second, millisecond / 10)
+        binding.waveformView.addAmplitude(recorder?.maxAmplitude?.toFloat() ?: 0f)
     }
 }
