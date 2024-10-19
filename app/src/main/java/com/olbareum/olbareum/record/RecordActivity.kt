@@ -1,4 +1,4 @@
-package com.olbareum.olbareum
+package com.olbareum.olbareum.record
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityRecordBinding
 import java.io.IOException
 

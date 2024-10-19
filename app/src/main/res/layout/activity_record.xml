@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecordActivity">
+    tools:context=".record.RecordActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/pretendard_medium"
         android:gravity="center_vertical"
         android:text="저는 오늘 속이 안좋아서 병원에 갔습니다."
@@ -53,7 +53,7 @@
         android:textSize="20dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <com.olbareum.olbareum.WaveformView
+    <com.olbareum.olbareum.record.WaveformView
         android:id="@+id/waveform_view"
         android:layout_width="0dp"
         android:layout_height="240dp"
@@ -80,7 +80,7 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/style_round_button"
         android:elevation="4dp"
         android:src="@drawable/ic_mic"
@@ -98,7 +98,7 @@
         android:fontFamily="@font/pretendard_bold"
         android:text="발음 분석하러 가기"
         android:textColor="@color/white"
-        android:textSize="14dp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

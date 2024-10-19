@@ -1,4 +1,4 @@
-package com.olbareum.olbareum
+package com.olbareum.olbareum.record
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,6 +6,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
+import com.olbareum.olbareum.R
 
 class WaveformView @JvmOverloads constructor(
     context: Context,

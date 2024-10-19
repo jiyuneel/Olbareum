@@ -1,4 +1,4 @@
-package com.olbareum.olbareum
+package com.olbareum.olbareum.record
 
 import android.os.Handler
 import android.os.Looper
