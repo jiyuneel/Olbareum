@@ -3,6 +3,7 @@
     <style name="Base.Theme.Olbareum" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/main_color</item>
+        <item name="colorAccent">@color/main_color</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/white</item>
