@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.olbareum.olbareum.FeedbackActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityRecordBinding
 import java.io.IOException
@@ -54,6 +55,14 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
 
         binding.analyzeButton.isEnabled = false
         binding.analyzeButton.alpha = 0.3f
+
+        binding.analyzeButton.setOnClickListener {
+            startActivity(Intent(this, FeedbackActivity::class.java))
+        }
+
+        binding.backButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun record() {
