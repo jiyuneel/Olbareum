@@ -1,10 +1,19 @@
 package com.olbareum.olbareum.retrofit.api
 
+import com.olbareum.olbareum.retrofit.dto.feedback.FeedbackResponseDto
+import okhttp3.MultipartBody
+import retrofit2.Call
+import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 interface FeedbackApi {
-//    @POST("/api/v1/feedback/create")
-//    fun createFeedback(
-//
-//    ): Call<>
+    @Multipart
+    @POST("/api/v1/feedback/create")
+    fun createFeedback(
+        @Header("authorization") accessToken: String,
+        @Part("textSentence") textSentence: String,
+        @Part audioFile: MultipartBody.Part
+    ): Call<FeedbackResponseDto>
 }

@@ -13,7 +13,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_comment" />
+        android:src="@drawable/img_comment" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
