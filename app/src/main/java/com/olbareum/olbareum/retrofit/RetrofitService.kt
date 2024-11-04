@@ -1,5 +1,6 @@
 package com.olbareum.olbareum.retrofit
 
+import com.olbareum.olbareum.MyApplication
 import com.olbareum.olbareum.retrofit.api.FeedbackApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -9,7 +10,7 @@ object RetrofitService {
     private const val BASE_URL = "https://backend.allbareum.p-e.kr"
 
     private val client = OkHttpClient.Builder()
-        .addInterceptor(AuthInterceptor(""))
+        .addInterceptor(AuthInterceptor(MyApplication.preferences))
         .build()
 
     private val retrofit = Retrofit.Builder()
