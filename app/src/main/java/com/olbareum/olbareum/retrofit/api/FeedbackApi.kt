@@ -12,7 +12,7 @@ interface FeedbackApi {
     @Multipart
     @POST("/api/v1/feedback/create")
     fun createFeedback(
-        @Header("authorization") accessToken: String,
+        @Header("Authorization") accessToken: String,
         @Part("textSentence") textSentence: String,
         @Part audioFile: MultipartBody.Part
     ): Call<FeedbackResponseDto>

@@ -20,8 +20,6 @@ data class FeedbackResponseDto(
     val pronunciationFeedbackImage: String,
     @SerializedName("intonation_feedback")
     val intonationFeedback: String,
-    @SerializedName("intonation_score")
-    val intonationScore: Int,
     @SerializedName("intonation_feedback_image")
     val intonationFeedbackImage: String
 )
