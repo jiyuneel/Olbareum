@@ -48,7 +48,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/pretendard_medium"
         android:gravity="center_vertical"
-        android:text="저는 오늘 속이 안좋아서 병원에 갔습니다."
+        android:text="나는 행복하게 끝나는 영화가 좋다."
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />

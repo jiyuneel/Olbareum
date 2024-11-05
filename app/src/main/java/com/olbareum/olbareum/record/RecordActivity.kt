@@ -1,7 +1,6 @@
 package com.olbareum.olbareum.record
 
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -20,15 +19,10 @@ import androidx.core.content.ContextCompat
 import com.olbareum.olbareum.FeedbackActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityRecordBinding
-import com.olbareum.olbareum.retrofit.RetrofitService
-import com.olbareum.olbareum.retrofit.dto.feedback.FeedbackResponseDto
 import com.olbareum.olbareum.retrofit.view_model.FeedbackViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 import java.io.IOException
 
@@ -75,11 +69,17 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
 
         binding.analyzeButton.setOnClickListener {
             uploadAudioFile(binding.sentence.text.toString())
-            startActivity(Intent(this, FeedbackActivity::class.java))
         }
 
         binding.backButton.setOnClickListener {
             finish()
+        }
+
+        viewModel.feedback.observe(this) {
+            val intent = Intent(this, FeedbackActivity::class.java).apply {
+                putExtra("feedbackData", it)
+            }
+            startActivity(intent)
         }
 
 //        val dialog = Dialog(this)

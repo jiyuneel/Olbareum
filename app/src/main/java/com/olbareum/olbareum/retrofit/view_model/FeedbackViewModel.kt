@@ -24,6 +24,7 @@ class FeedbackViewModel : ViewModel() {
                 Log.i("testt", "${call.request()}")
                 if (response.isSuccessful) {
                     Log.d("testt", "${response.code()} ${response.body()}")
+                    _feedback.value = response.body()
                 } else {
                     Log.e("testt", "${response.code()} ${response.errorBody()?.string()}")
                 }
