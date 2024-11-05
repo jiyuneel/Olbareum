@@ -1,12 +1,18 @@
 package com.olbareum.olbareum.record
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.widget.ProgressBar
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -14,6 +20,16 @@ import androidx.core.content.ContextCompat
 import com.olbareum.olbareum.FeedbackActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityRecordBinding
+import com.olbareum.olbareum.retrofit.RetrofitService
+import com.olbareum.olbareum.retrofit.dto.feedback.FeedbackResponseDto
+import com.olbareum.olbareum.retrofit.view_model.FeedbackViewModel
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 import java.io.IOException
 
 class RecordActivity : AppCompatActivity(), OnTimerTickListener {
@@ -29,6 +45,7 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
     private lateinit var timer: Timer
 
     private lateinit var binding: ActivityRecordBinding
+    private val viewModel: FeedbackViewModel by viewModels()
     private var recorder: MediaRecorder? = null
     private var filename: String = ""
     private var state: State = State.RELEASE
@@ -57,12 +74,20 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
         binding.analyzeButton.alpha = 0.3f
 
         binding.analyzeButton.setOnClickListener {
+            uploadAudioFile(binding.sentence.text.toString())
             startActivity(Intent(this, FeedbackActivity::class.java))
         }
 
         binding.backButton.setOnClickListener {
             finish()
         }
+
+//        val dialog = Dialog(this)
+//        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 배경을 투명하게
+//        dialog.setContentView(ProgressBar(this)) // ProgressBar 위젯 생성
+//        dialog.setCanceledOnTouchOutside(false) // 외부 터치 막음
+//        dialog.setOnCancelListener { this.finish() } // 뒤로가기시 현재 액티비티 종료
+//        dialog.show()
     }
 
     private fun record() {
@@ -203,5 +228,18 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
 
         binding.timerTextView.text = String.format("%02d:%02d.%02d", minute, second, millisecond / 10)
         binding.waveformView.addAmplitude(recorder?.maxAmplitude?.toFloat() ?: 0f)
+    }
+
+    private fun uploadAudioFile(textSentence: String) {
+        val file = File(filename)
+        if (!file.exists()) {
+            return
+        }
+
+        // 파일을 RequestBody로 변환하고 Multipart로 포장
+        val requestFile = file.asRequestBody("audio/3gp".toMediaTypeOrNull())
+        val audioPart = MultipartBody.Part.createFormData("audioFile", file.name, requestFile)
+
+        viewModel.createFeedback(textSentence, audioPart)
     }
 }
