@@ -15,25 +15,37 @@ class FeedbackViewModel : ViewModel() {
     private val _feedback = MutableLiveData<FeedbackResponseDto>()
     val feedback: LiveData<FeedbackResponseDto> get() = _feedback
 
-    fun createFeedback(textSentence: String, audioFile: MultipartBody.Part) {
-        RetrofitService.feedbackApi.createFeedback(textSentence = textSentence, audioFile = audioFile).enqueue(object : Callback<FeedbackResponseDto> {
-            override fun onResponse(
-                call: Call<FeedbackResponseDto>,
-                response: Response<FeedbackResponseDto>
-            ) {
-                Log.i("testt", "${call.request()}")
-                if (response.isSuccessful) {
-                    Log.d("testt", "${response.code()} ${response.body()}")
-                    _feedback.value = response.body()
-                } else {
-                    Log.e("testt", "${response.code()} ${response.errorBody()?.string()}")
-                }
-            }
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> get() = _errorMessage
 
-            override fun onFailure(call: Call<FeedbackResponseDto>, t: Throwable) {
-                Log.i("testt", "${call.request()}")
-                Log.e("testt", t.message.toString())
-            }
-        })
+    fun createFeedback(textSentence: String, audioFile: MultipartBody.Part) {
+        RetrofitService.feedbackApi.createFeedback(textSentence, audioFile)
+            .enqueue(object : Callback<FeedbackResponseDto> {
+                override fun onResponse(
+                    call: Call<FeedbackResponseDto>,
+                    response: Response<FeedbackResponseDto>
+                ) {
+                    Log.i("testt", "${call.request()}")
+                    if (response.isSuccessful) {
+                        Log.d("testt", "${response.code()} ${response.body()}")
+                        _feedback.value = response.body()
+                    } else {
+                        // response.errorBody()?.string()을 호출하면 스트림이 소모되어 다시 사용할 수 없음
+//                    Log.e("testt", "${response.code()} ${response.errorBody()?.string()}")
+                        try {
+                            val errorResponse =
+                                response.errorBody()?.let { RetrofitService.errorBody.convert(it) }
+                            _errorMessage.value = errorResponse?.message
+                        } catch (e: Exception) {
+                            Log.e("testt", e.toString())
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<FeedbackResponseDto>, t: Throwable) {
+                    Log.i("testt", "${call.request()}")
+                    Log.e("testt", t.message.toString())
+                }
+            })
     }
 }

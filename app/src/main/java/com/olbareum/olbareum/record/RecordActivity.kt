@@ -44,6 +44,8 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
     private var filename: String = ""
     private var state: State = State.RELEASE
 
+    private val progressDialog = Dialog(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecordBinding.inflate(layoutInflater)
@@ -82,12 +84,12 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
             startActivity(intent)
         }
 
-//        val dialog = Dialog(this)
-//        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 배경을 투명하게
-//        dialog.setContentView(ProgressBar(this)) // ProgressBar 위젯 생성
-//        dialog.setCanceledOnTouchOutside(false) // 외부 터치 막음
-//        dialog.setOnCancelListener { this.finish() } // 뒤로가기시 현재 액티비티 종료
-//        dialog.show()
+        viewModel.errorMessage.observe(this) { message ->
+            AlertDialog.Builder(this)
+                .setMessage("$message\n다시 시도해주세요.")
+                .setPositiveButton("확인") { _, _ -> }
+                .show()
+        }
     }
 
     private fun record() {
@@ -226,7 +228,8 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
         val second = (duration / 1000) % 60
         val minute = (duration / 1000 / 60)
 
-        binding.timerTextView.text = String.format("%02d:%02d.%02d", minute, second, millisecond / 10)
+        binding.timerTextView.text =
+            String.format("%02d:%02d.%02d", minute, second, millisecond / 10)
         binding.waveformView.addAmplitude(recorder?.maxAmplitude?.toFloat() ?: 0f)
     }
 

@@ -2,6 +2,7 @@ package com.olbareum.olbareum.retrofit
 
 import com.olbareum.olbareum.MyApplication
 import com.olbareum.olbareum.retrofit.api.FeedbackApi
+import com.olbareum.olbareum.retrofit.dto.ErrorResponseDto
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,5 +20,9 @@ object RetrofitService {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    val errorBody = retrofit.responseBodyConverter<ErrorResponseDto>(
+        ErrorResponseDto::class.java,
+        ErrorResponseDto::class.java.annotations
+    )
     val feedbackApi: FeedbackApi = retrofit.create(FeedbackApi::class.java)
 }
