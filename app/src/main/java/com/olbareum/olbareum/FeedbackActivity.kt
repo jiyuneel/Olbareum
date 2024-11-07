@@ -17,11 +17,11 @@ class FeedbackActivity : AppCompatActivity() {
 
         val feedbackData = intent.getParcelableExtra<FeedbackResponseDto>("feedbackData")
         if (feedbackData != null) {
-            binding.score.text = "${feedbackData.pronunciationScore}점"
-//            val pronunciationScore = feedbackData.pronunciationScore.toInt()
-//            binding.scoreBar.progress = feedbackData.pronunciationScore.toInt()
+            val pronunciationScore = feedbackData.pronunciationScore.toInt()
+            binding.score.text = "${pronunciationScore}점"
+            binding.scoreBar.progress = pronunciationScore
             binding.pronunciationFeedback.text = feedbackData.pronunciationFeedback
-//            binding.intonationFeedback.text = feedbackData.intonationFeedback
+            binding.intonationFeedback.text = feedbackData.intonationFeedback
             binding.sentence.text = feedbackData.textSentence
             binding.transcription.text = feedbackData.transcription
 
@@ -29,9 +29,9 @@ class FeedbackActivity : AppCompatActivity() {
                 .load(feedbackData.pronunciationFeedbackImage)
                 .into(binding.pronunciationFeedbackImage)
 
-//            Glide.with(binding.root.context)
-//                .load(feedbackData.intonationFeedbackImage)
-//                .into(binding.intonationFeedbackImage)
+            Glide.with(binding.root.context)
+                .load(feedbackData.intonationFeedbackImage)
+                .into(binding.intonationFeedbackImage)
         }
 
         binding.backButton.setOnClickListener {
