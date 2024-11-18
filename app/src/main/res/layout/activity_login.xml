@@ -2,18 +2,37 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/img_comment" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/style_login_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="80dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="올바른 발음을\n연습해 볼까요?"
+            android:textColor="@color/white"
+            android:textSize="36dp" />
+
+    </FrameLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -27,7 +46,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:text="ID"
             android:textColor="@color/main_color"
-            android:textSize="20dp" />
+            android:textSize="24dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -49,7 +68,7 @@
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="30dp" />
+            android:layout_height="24dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +76,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:text="Password"
             android:textColor="@color/main_color"
-            android:textSize="20dp" />
+            android:textSize="24dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -81,7 +100,7 @@
 
     <Space
         android:layout_width="0dp"
-        android:layout_height="60dp" />
+        android:layout_height="40dp" />
 
     <Button
         android:id="@+id/login_button"
