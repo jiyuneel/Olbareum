@@ -5,25 +5,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.olbareum.olbareum.retrofit.RetrofitService
-import com.olbareum.olbareum.retrofit.dto.feedback.FeedbackResponseDto
+import com.olbareum.olbareum.retrofit.dto.feedback.PronunciationFeedbackResponseDto
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FeedbackViewModel : ViewModel() {
-    private val _feedback = MutableLiveData<FeedbackResponseDto>()
-    val feedback: LiveData<FeedbackResponseDto> get() = _feedback
+    private val _feedback = MutableLiveData<PronunciationFeedbackResponseDto>()
+    val feedback: LiveData<PronunciationFeedbackResponseDto> get() = _feedback
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
     fun createFeedback(textSentence: String, audioFile: MultipartBody.Part) {
-        RetrofitService.feedbackApi.createFeedback(textSentence, audioFile)
-            .enqueue(object : Callback<FeedbackResponseDto> {
+        RetrofitService.feedbackApi.createPronunciationFeedback(textSentence, audioFile)
+            .enqueue(object : Callback<PronunciationFeedbackResponseDto> {
                 override fun onResponse(
-                    call: Call<FeedbackResponseDto>,
-                    response: Response<FeedbackResponseDto>
+                    call: Call<PronunciationFeedbackResponseDto>,
+                    response: Response<PronunciationFeedbackResponseDto>
                 ) {
                     Log.i("testt", "${call.request()}")
                     if (response.isSuccessful) {
@@ -42,7 +42,7 @@ class FeedbackViewModel : ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<FeedbackResponseDto>, t: Throwable) {
+                override fun onFailure(call: Call<PronunciationFeedbackResponseDto>, t: Throwable) {
                     Log.i("testt", "${call.request()}")
                     Log.e("testt", t.message.toString())
                 }
