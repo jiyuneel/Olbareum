@@ -16,13 +16,13 @@ data class PronunciationFeedbackResponseDto(
     @SerializedName("status")
     val status: Int,                            // 1: 정확한 발음 (피드백&입모양 사진 없음), 2: 발음에 틀린 부분 있음 (피드백&입모양 사진 있음)
     @SerializedName("pronounced_text")
-    val pronouncedText: String,                 // 문장을 정확하게 발음했을 때 나와야 하는 문장
+    val pronouncedText: String,                 // 문장을 정확하게 발음했을 때 나와야 하는 문장 ex) 나는 행보카게 끈나는 영화가 조타
     @SerializedName("transcription")
-    val transcription: String,                  // 문장을 발음한 대로 변환한 것
+    val transcription: String,                  // 사용자의 발화를 발음 그대로 전사한 한글 텍스트 ex) 나는 행복하게 끝나는 용화가 좋다.
     @SerializedName("feedbackCount")
-    val feedbackCount: Int,                     // 틀린 부분 수
+    val feedbackCount: Int,                     // 생성된 피드백 개수 (word_index, pronunciation_feedbacks, feedback_image_names, wrong_spellings의 길이와 같음)
     @SerializedName("wordIndex")
-    val wordIndex: List<Int>,                   // 틀린 부분 인덱스 리스트
+    val wordIndex: List<Int>,                   // 몇 번째 단어에서 틀렸는지 나타내는 인덱스를 포함하는 리스트
     @SerializedName("pronunciationFeedbacks")
     val pronunciationFeedbacks: List<String>,   // 발음 피드백 리스트
     @SerializedName("feedbackImageUrls")
