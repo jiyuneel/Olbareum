@@ -1,4 +1,4 @@
-package com.olbareum.olbareum.retrofit.dto.feedback
+package com.olbareum.olbareum.feedback
 
 enum class FeedbackStatus(val value: Int) {
     CORRECT(1),     // 정확한 발음

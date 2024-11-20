@@ -23,7 +23,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".PronunciationFeedbackActivity"
+            android:name=".feedback.PronunciationFeedbackActivity"
             android:exported="false" />
         <activity
             android:name=".record.RecordActivity"

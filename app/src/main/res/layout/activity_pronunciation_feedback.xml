@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray1"
     android:orientation="vertical"
-    tools:context=".PronunciationFeedbackActivity">
+    tools:context=".feedback.PronunciationFeedbackActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -47,7 +47,9 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +57,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:text="올바름 점수는"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
@@ -67,17 +69,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_extrabold"
-                android:text="80점"
+                android:text="100점"
                 android:textColor="@color/main_color"
-                android:textSize="40dp" />
+                android:textSize="40sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="이에요"
+                android:text=" 이에요"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -85,8 +87,8 @@
             android:id="@+id/score_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:progress="80"
+            android:layout_marginTop="6dp"
+            android:progress="100"
             app:indicatorColor="@color/main_color"
             app:trackColor="@color/gray1"
             app:trackCornerRadius="100dp"
@@ -95,7 +97,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/style_radius_stroke_gray2"
             android:orientation="vertical">
 
@@ -127,6 +129,7 @@
                 android:text="저는 오늘 속이 안좋아서 병원에 갔습니다."
                 android:textColor="@color/black"
                 android:textSize="14dp" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -136,14 +139,14 @@
         android:layout_height="match_parent"
         android:layout_margin="20dp"
         android:background="@drawable/style_radius_white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingVertical="20dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="6dp"
             android:orientation="horizontal">
 
             <TextView
@@ -157,29 +160,37 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
+                android:fontFamily="@font/pretendard_semibold"
                 android:text=" 피드백"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="16dp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/feedback_view_pager"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
-        <!--                <me.relex.circleindicator.CircleIndicator3-->
-        <!--                    android:id="@+id/article_indicator"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="12dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:layout_marginBottom="20dp"-->
-        <!--                    app:ci_drawable="@drawable/style_indicator_selected"-->
-        <!--                    app:ci_drawable_unselected="@drawable/style_indicator_unselected"-->
-        <!--                    app:ci_height="6dp"-->
-        <!--                    app:ci_width="6dp" />-->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/feedback_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+                android:id="@+id/dots_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:dotsColor="@color/main_color"
+                app:dotsSize="10dp"
+                app:dotsStrokeWidth="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

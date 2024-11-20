@@ -1,4 +1,4 @@
-package com.olbareum.olbareum.retrofit.dto.feedback
+package com.olbareum.olbareum.feedback
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.olbareum.olbareum.databinding.ItemFeedbackViewpagerBinding
 
 class FeedbackViewPagerAdapter(
+    private val feedbackCount: Int,
     private val feedbacks: List<String>,
     private val imageUrls: List<String>
 ) : RecyclerView.Adapter<FeedbackViewPagerAdapter.ImageViewHolder>() {
@@ -24,7 +25,7 @@ class FeedbackViewPagerAdapter(
         )
     }
 
-    override fun getItemCount(): Int = feedbacks.size
+    override fun getItemCount(): Int = feedbackCount
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         holder.binding.message.text = feedbacks[position]

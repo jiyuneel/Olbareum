@@ -50,10 +50,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    //Retrofit 라이브러리
+    // Retrofit 라이브러리
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
+    // https://github.com/bumptech/glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    // https://github.com/tommybuonomo/dotsindicator
+    implementation("com.tbuonomo:dotsindicator:5.0")
 }
