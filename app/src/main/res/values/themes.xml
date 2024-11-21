@@ -10,4 +10,16 @@
     </style>
 
     <style name="Theme.Olbareum" parent="Base.Theme.Olbareum" />
+
+    <style name="Theme.Olbareum.Login" parent="Base.Theme.Olbareum">
+        <!-- StatusBar 색상 변경 -->
+        <item name="android:statusBarColor">@color/main_color</item>
+        <!-- StatusBar 아이콘 색상을 흰색으로 설정 -->
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.Olbareum.Gray" parent="Base.Theme.Olbareum">
+        <item name="android:statusBarColor">@color/gray1</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>
