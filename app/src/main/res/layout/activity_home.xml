@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/style_radius_stroke_gray1"
+            android:background="@drawable/style_radius_stroke_gray2"
             android:elevation="2dp"
             android:orientation="horizontal">
 
@@ -61,7 +61,7 @@
                 android:background="@android:color/transparent"
                 android:drawableStart="@drawable/ic_round_edit_20"
                 android:drawableTint="@color/yellow5"
-                android:fontFamily="@font/pretendard_regular"
+                android:fontFamily="@font/pretendard_medium"
                 android:text="나의 발음 분석"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -70,7 +70,7 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="12dp"
-                app:dividerColor="@color/gray1" />
+                app:dividerColor="@color/gray2" />
 
             <Button
                 android:layout_width="0dp"
@@ -80,7 +80,7 @@
                 android:background="@android:color/transparent"
                 android:drawableStart="@drawable/ic_round_auto_awesome_20"
                 android:drawableTint="@color/yellow5"
-                android:fontFamily="@font/pretendard_regular"
+                android:fontFamily="@font/pretendard_medium"
                 android:text="오늘의 미션 !"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
