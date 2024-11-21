@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="올바름"
+                android:text="올발음"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
@@ -101,7 +101,7 @@
             android:layout_gravity="center_horizontal">
 
             <ImageView
-                android:layout_width="180dp"
+                android:layout_width="150dp"
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_speech_bubble"
@@ -116,7 +116,7 @@
                 android:gravity="center_horizontal"
                 android:text="무엇을\n연습할까요?\n"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
