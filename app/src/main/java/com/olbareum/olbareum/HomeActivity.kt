@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.olbareum.olbareum.databinding.ActivityHomeBinding
-import com.olbareum.olbareum.select.SentenceSelectActivity
+import com.olbareum.olbareum.select.PronunciationTypeSelectActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -16,7 +16,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.pronunciationButton.setOnClickListener {
-            startActivity(Intent(this, SentenceSelectActivity::class.java))
+            startActivity(Intent(this, PronunciationTypeSelectActivity::class.java))
         }
 
         binding.intonationButton.setOnClickListener {}

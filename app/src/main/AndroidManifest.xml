@@ -17,6 +17,10 @@
         android:theme="@style/Theme.Olbareum"
         tools:targetApi="31">
         <activity
+            android:name=".select.PronunciationTypeSelectActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Olbareum.Gray" />
+        <activity
             android:name=".select.SentenceSelectActivity"
             android:exported="false"
             android:theme="@style/Theme.Olbareum.Gray" />
@@ -38,6 +42,7 @@
             android:theme="@style/Theme.Olbareum.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

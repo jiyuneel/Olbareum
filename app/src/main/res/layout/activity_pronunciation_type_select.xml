@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray1"
     android:orientation="vertical"
-    tools:context=".select.SentenceSelectActivity">
+    android:background="@color/gray1"
+    tools:context=".select.PronunciationTypeSelectActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/pretendard_medium"
-            android:text="문장 선택"
+            android:text="발음 선택"
             android:textColor="@color/black"
             android:textSize="16dp" />
 
@@ -45,12 +45,12 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/pretendard_bold"
-        android:text="어떤 문장을 연습할까요?"
+        android:text="어떤 발음을 연습할까요?"
         android:textColor="@color/black"
         android:textSize="28dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sentence_list"
+        android:id="@+id/type_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="20dp" />

@@ -11,9 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:gravity="center_vertical"
-        app:contentInsetEnd="20dp"
-        app:contentInsetStart="20dp">
+        android:gravity="center_vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
@@ -47,7 +45,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="12dp"
+            android:layout_marginVertical="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/style_radius_stroke_gray2"
             android:elevation="2dp"
