@@ -8,20 +8,19 @@ import com.olbareum.olbareum.databinding.ItemSentenceRecyclerviewBinding
 import com.olbareum.olbareum.record.RecordActivity
 
 class SentenceRecyclerViewAdapter(
-    private val items: List<Int>
+    private val items: List<String>
 ) : RecyclerView.Adapter<SentenceRecyclerViewAdapter.SentenceViewHolder>() {
 
-    class SentenceViewHolder(val binding: ItemSentenceRecyclerviewBinding) :
+    inner class SentenceViewHolder(val binding: ItemSentenceRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SentenceViewHolder {
-        return SentenceViewHolder(
-            ItemSentenceRecyclerviewBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        val binding = ItemSentenceRecyclerviewBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        return SentenceViewHolder(binding)
     }
 
     override fun getItemCount(): Int = items.size
@@ -30,10 +29,12 @@ class SentenceRecyclerViewAdapter(
         val binding = holder.binding
         val context = binding.root.context
 
-        binding.level.text = items[position].toString()
+        binding.sentence.text = items[position]
 
-        binding.button.setOnClickListener {
-            context.startActivity(Intent(context, RecordActivity::class.java))
+        binding.root.setOnClickListener {
+            val intent = Intent(context, RecordActivity::class.java)
+            intent.putExtra("sentence", items[position])
+            context.startActivity(intent)
         }
     }
 }

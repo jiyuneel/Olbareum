@@ -14,9 +14,15 @@ class SentenceSelectActivity : AppCompatActivity() {
         binding = ActivitySentenceSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val type = intent.getStringExtra("type") ?: ""
 
         val recyclerView = binding.sentenceList
-        recyclerView.adapter = SentenceRecyclerViewAdapter(listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+        recyclerView.adapter =
+            SentenceRecyclerViewAdapter(PronunciationSentenceData.data[type] ?: emptyList())
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        binding.backButton.setOnClickListener {
+            finish()
+        }
     }
 }

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/pretendard_medium"
-            android:text="Lv.01"
+            android:text="문장 녹음"
             android:textColor="@color/black"
             android:textSize="16dp" />
 

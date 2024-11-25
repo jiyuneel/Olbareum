@@ -93,7 +93,9 @@ class PronunciationTypeRecyclerViewAdapter(
         binding.root.layoutParams = layoutParams
 
         binding.root.setOnClickListener {
-            context.startActivity(Intent(context, SentenceSelectActivity::class.java))
+            val intent = Intent(context, SentenceSelectActivity::class.java)
+            intent.putExtra("type", items[position])
+            context.startActivity(intent)
         }
     }
 
