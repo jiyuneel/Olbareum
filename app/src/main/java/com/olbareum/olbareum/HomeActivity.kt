@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.olbareum.olbareum.databinding.ActivityHomeBinding
+import com.olbareum.olbareum.select.IntonationTypeSelectActivity
 import com.olbareum.olbareum.select.PronunciationTypeSelectActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -18,7 +19,8 @@ class HomeActivity : AppCompatActivity() {
         binding.pronunciationButton.setOnClickListener {
             startActivity(Intent(this, PronunciationTypeSelectActivity::class.java))
         }
-
-        binding.intonationButton.setOnClickListener {}
+        binding.intonationButton.setOnClickListener {
+            startActivity(Intent(this, IntonationTypeSelectActivity::class.java))
+        }
     }
 }

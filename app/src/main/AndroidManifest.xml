@@ -17,6 +17,11 @@
         android:theme="@style/Theme.Olbareum"
         tools:targetApi="31">
         <activity
+            android:name=".select.IntonationTypeSelectActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Olbareum.Gray" />
+        <activity
             android:name=".select.PronunciationTypeSelectActivity"
             android:exported="false"
             android:screenOrientation="portrait"
