@@ -1,11 +1,11 @@
 package com.olbareum.olbareum.select
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.olbareum.olbareum.BaseActivity
 import com.olbareum.olbareum.databinding.ActivityPronunciationTypeSelectBinding
 
-class PronunciationTypeSelectActivity : AppCompatActivity() {
+class PronunciationTypeSelectActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPronunciationTypeSelectBinding
 

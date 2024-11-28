@@ -8,14 +8,14 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.olbareum.olbareum.BaseActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityPronunciationFeedbackBinding
 import com.olbareum.olbareum.enums.FeedbackStatus
 import com.olbareum.olbareum.retrofit.dto.feedback.PronunciationFeedbackResponseDto
 
-class PronunciationFeedbackActivity : AppCompatActivity() {
+class PronunciationFeedbackActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPronunciationFeedbackBinding
 

@@ -1,12 +1,12 @@
 package com.olbareum.olbareum.select
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.olbareum.olbareum.BaseActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityIntonationTypeSelectBinding
 
-class IntonationTypeSelectActivity : AppCompatActivity() {
+class IntonationTypeSelectActivity : BaseActivity() {
 
     private lateinit var binding: ActivityIntonationTypeSelectBinding
 

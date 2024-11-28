@@ -1,11 +1,11 @@
 package com.olbareum.olbareum.select
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.olbareum.olbareum.BaseActivity
 import com.olbareum.olbareum.databinding.ActivitySentenceSelectBinding
 
-class SentenceSelectActivity : AppCompatActivity() {
+class SentenceSelectActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySentenceSelectBinding
 
