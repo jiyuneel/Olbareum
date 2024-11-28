@@ -19,26 +19,33 @@
         <activity
             android:name=".select.PronunciationTypeSelectActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Olbareum.Gray" />
         <activity
             android:name=".select.SentenceSelectActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Olbareum.Gray" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".feedback.PronunciationFeedbackActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".record.RecordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Olbareum.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
