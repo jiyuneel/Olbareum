@@ -1,4 +1,4 @@
-package com.olbareum.olbareum.feedback
+package com.olbareum.olbareum.enums
 
 enum class FeedbackStatus(val value: Int) {
     CORRECT(1),     // 정확한 발음
