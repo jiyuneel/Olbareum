@@ -1,4 +1,4 @@
-package com.olbareum.olbareum.select
+package com.olbareum.olbareum.intonation
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager

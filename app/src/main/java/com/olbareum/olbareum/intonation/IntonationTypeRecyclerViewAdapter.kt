@@ -1,4 +1,4 @@
-package com.olbareum.olbareum.select
+package com.olbareum.olbareum.intonation
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.olbareum.olbareum.databinding.ItemIntonationTypeRecyclerviewBinding
 import com.olbareum.olbareum.enums.FeedbackType
+import com.olbareum.olbareum.select.SentenceSelectActivity
 
 class IntonationTypeRecyclerViewAdapter(
     private val items: List<Pair<String, Int>>
@@ -45,14 +46,14 @@ class IntonationTypeRecyclerViewAdapter(
         // 마진 설정
         val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
         when (getItemViewType(position)) {
-            PronunciationTypeRecyclerViewAdapter.TYPE_LEFT -> layoutParams.setMargins(
+            TYPE_LEFT -> layoutParams.setMargins(
                 dpToPx(context, 20f),
                 dpToPx(context, 20f),
                 dpToPx(context, 10f),
                 dpToPx(context, 20f)
             )
 
-            PronunciationTypeRecyclerViewAdapter.TYPE_RIGHT -> layoutParams.setMargins(
+            TYPE_RIGHT -> layoutParams.setMargins(
                 dpToPx(context, 10f),
                 dpToPx(context, 20f),
                 dpToPx(context, 20f),

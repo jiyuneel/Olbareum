@@ -3,8 +3,8 @@ package com.olbareum.olbareum
 import android.content.Intent
 import android.os.Bundle
 import com.olbareum.olbareum.databinding.ActivityHomeBinding
-import com.olbareum.olbareum.select.IntonationTypeSelectActivity
-import com.olbareum.olbareum.select.PronunciationTypeSelectActivity
+import com.olbareum.olbareum.intonation.IntonationTypeSelectActivity
+import com.olbareum.olbareum.pronunciation.PronunciationTypeSelectActivity
 
 class HomeActivity : BaseActivity() {
 

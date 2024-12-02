@@ -1,4 +1,4 @@
-package com.olbareum.olbareum.select
+package com.olbareum.olbareum.pronunciation
 
 import android.content.Context
 import android.content.Intent
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ItemPronunciationTypeRecyclerviewBinding
 import com.olbareum.olbareum.enums.FeedbackType
+import com.olbareum.olbareum.select.SentenceSelectActivity
 import com.olbareum.olbareum.util.CustomTypefaceSpan
 
 class PronunciationTypeRecyclerViewAdapter(

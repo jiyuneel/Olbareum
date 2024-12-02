@@ -21,12 +21,12 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".select.IntonationTypeSelectActivity"
+            android:name=".intonation.IntonationTypeSelectActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Olbareum.Gray" />
         <activity
-            android:name=".select.PronunciationTypeSelectActivity"
+            android:name=".pronunciation.PronunciationTypeSelectActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Olbareum.Gray" />

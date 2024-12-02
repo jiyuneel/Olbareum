@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.olbareum.olbareum.BaseActivity
 import com.olbareum.olbareum.databinding.ActivitySentenceSelectBinding
 import com.olbareum.olbareum.enums.FeedbackType
+import com.olbareum.olbareum.pronunciation.PronunciationSentenceData
 
 class SentenceSelectActivity : BaseActivity() {
 

@@ -1,4 +1,4 @@
-package com.olbareum.olbareum.select
+package com.olbareum.olbareum.pronunciation
 
 object PronunciationSentenceData {
     val data: Map<String, List<String>> = mapOf(

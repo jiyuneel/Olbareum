@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray1"
     android:orientation="vertical"
-    tools:context=".select.IntonationTypeSelectActivity">
+    tools:context=".intonation.IntonationTypeSelectActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

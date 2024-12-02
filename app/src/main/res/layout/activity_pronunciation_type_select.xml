@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray1"
-    tools:context=".select.PronunciationTypeSelectActivity">
+    tools:context=".pronunciation.PronunciationTypeSelectActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
