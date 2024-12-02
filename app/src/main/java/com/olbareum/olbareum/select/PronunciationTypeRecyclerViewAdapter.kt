@@ -11,19 +11,20 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ItemPronunciationTypeRecyclerviewBinding
+import com.olbareum.olbareum.enums.FeedbackType
 import com.olbareum.olbareum.util.CustomTypefaceSpan
 
 class PronunciationTypeRecyclerViewAdapter(
     private val items: List<String>
 ) : RecyclerView.Adapter<PronunciationTypeRecyclerViewAdapter.PronunciationTypeViewHolder>() {
 
+    inner class PronunciationTypeViewHolder(val binding: ItemPronunciationTypeRecyclerviewBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
     companion object {
         const val TYPE_LEFT = 0
         const val TYPE_RIGHT = 1
     }
-
-    inner class PronunciationTypeViewHolder(val binding: ItemPronunciationTypeRecyclerviewBinding) :
-        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PronunciationTypeViewHolder {
         val binding = ItemPronunciationTypeRecyclerviewBinding.inflate(
@@ -94,7 +95,8 @@ class PronunciationTypeRecyclerViewAdapter(
 
         binding.root.setOnClickListener {
             val intent = Intent(context, SentenceSelectActivity::class.java)
-            intent.putExtra("type", items[position])
+            intent.putExtra("feedback_type", FeedbackType.PRONUNCIATION)
+            intent.putExtra("pronunciation_type", items[position])
             context.startActivity(intent)
         }
     }

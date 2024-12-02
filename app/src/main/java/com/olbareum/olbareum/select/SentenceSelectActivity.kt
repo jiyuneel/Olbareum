@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.olbareum.olbareum.BaseActivity
 import com.olbareum.olbareum.databinding.ActivitySentenceSelectBinding
+import com.olbareum.olbareum.enums.FeedbackType
 
 class SentenceSelectActivity : BaseActivity() {
 
@@ -14,11 +15,13 @@ class SentenceSelectActivity : BaseActivity() {
         binding = ActivitySentenceSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val type = intent.getStringExtra("type") ?: ""
+        val feedbackType = intent.getSerializableExtra("feedback_type") ?: FeedbackType.PRONUNCIATION
+        val pronunciationType = intent.getStringExtra("pronunciation_type") ?: ""
+        val intonationType = intent.getStringExtra("intonation_type") ?: ""
 
         val recyclerView = binding.sentenceList
         recyclerView.adapter =
-            SentenceRecyclerViewAdapter(PronunciationSentenceData.data[type] ?: emptyList())
+            SentenceRecyclerViewAdapter(PronunciationSentenceData.data[pronunciationType] ?: emptyList())
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.backButton.setOnClickListener {

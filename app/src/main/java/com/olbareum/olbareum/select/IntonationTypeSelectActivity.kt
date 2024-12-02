@@ -1,7 +1,7 @@
 package com.olbareum.olbareum.select
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.olbareum.olbareum.BaseActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityIntonationTypeSelectBinding
@@ -19,12 +19,13 @@ class IntonationTypeSelectActivity : BaseActivity() {
         val recyclerView = binding.typeList
         recyclerView.adapter = IntonationTypeRecyclerViewAdapter(
             listOf(
-                Pair("평서문", R.drawable.img_declarative),
                 Pair("의문문", R.drawable.img_interrogative),
-                Pair("감탄문", R.drawable.img_exclamatory)
+                Pair("평서문", R.drawable.img_declarative),
+                Pair("감탄문", R.drawable.img_exclamatory),
+                Pair("청유문", R.drawable.img_request)
             )
         )
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         binding.backButton.setOnClickListener {
             finish()

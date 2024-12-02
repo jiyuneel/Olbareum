@@ -51,7 +51,7 @@
 
     <Space
         android:layout_width="0dp"
-        android:layout_height="24dp" />
+        android:layout_height="20dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/type_list"
