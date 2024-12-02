@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.olbareum.olbareum.databinding.ItemSentenceRecyclerviewBinding
+import com.olbareum.olbareum.enums.FeedbackType
 import com.olbareum.olbareum.record.RecordActivity
 
 class SentenceRecyclerViewAdapter(
-    private val items: List<String>
+    private val items: List<String>,
+    private val feedbackType: FeedbackType?,
 ) : RecyclerView.Adapter<SentenceRecyclerViewAdapter.SentenceViewHolder>() {
 
     inner class SentenceViewHolder(val binding: ItemSentenceRecyclerviewBinding) :
@@ -33,6 +35,7 @@ class SentenceRecyclerViewAdapter(
 
         binding.root.setOnClickListener {
             val intent = Intent(context, RecordActivity::class.java)
+            intent.putExtra("feedback_type", feedbackType)
             intent.putExtra("sentence", items[position])
             context.startActivity(intent)
         }

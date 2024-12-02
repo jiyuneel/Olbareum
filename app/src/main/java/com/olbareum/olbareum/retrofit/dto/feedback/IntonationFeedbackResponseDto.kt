@@ -1,25 +1,24 @@
 package com.olbareum.olbareum.retrofit.dto.feedback
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class IntonationFeedbackResponseDto(
     @SerializedName("id")
     val id: String,
     @SerializedName("userId")
     val userId: String,
-    @SerializedName("textSentence")
-    val textSentence: String,
+    @SerializedName("sentenceCode")
+    val sentenceCode: String,
     @SerializedName("status")
     val status: Int,
-    @SerializedName("feedbackCount")
-    val feedbackCount: Int,
-    @SerializedName("wordIndex")
-    val wordIndex: String,
     @SerializedName("intonationFeedbacks")
     val intonationFeedbacks: String,
     @SerializedName("feedbackImageUrls")
     val feedbackImageUrls: String,
     @SerializedName("intonationScore")
     val intonationScore: Double
-)
+): Parcelable

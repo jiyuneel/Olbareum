@@ -21,8 +21,8 @@ class IntonationTypeSelectActivity : BaseActivity() {
             listOf(
                 Pair("의문문", R.drawable.img_interrogative),
                 Pair("평서문", R.drawable.img_declarative),
+                Pair("청유문", R.drawable.img_request),
                 Pair("감탄문", R.drawable.img_exclamatory),
-                Pair("청유문", R.drawable.img_request)
             )
         )
         recyclerView.layoutManager = GridLayoutManager(this, 2)

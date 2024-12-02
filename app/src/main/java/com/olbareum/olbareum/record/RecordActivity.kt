@@ -13,12 +13,14 @@ import android.util.Log
 import android.widget.ProgressBar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.olbareum.olbareum.FeedbackActivity
+import com.olbareum.olbareum.BaseActivity
+import com.olbareum.olbareum.feedback.PronunciationFeedbackActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityRecordBinding
+import com.olbareum.olbareum.enums.FeedbackType
+import com.olbareum.olbareum.intonation.IntonationSentenceData
 import com.olbareum.olbareum.retrofit.view_model.FeedbackViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -26,7 +28,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
 
-class RecordActivity : AppCompatActivity(), OnTimerTickListener {
+class RecordActivity : BaseActivity(), OnTimerTickListener {
 
     companion object {
         private const val REQUEST_RECORD_AUDIO_CODE = 200
@@ -44,12 +46,20 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
     private var filename: String = ""
     private var state: State = State.RELEASE
 
-    private val progressDialog = Dialog(this)
+    private lateinit var progressDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val feedbackType = intent.getSerializableExtra("feedback_type") as FeedbackType?
+        val sentence = intent.getStringExtra("sentence") ?: ""
+        binding.sentence.text = sentence
+
+
+        progressDialog = Dialog(this)
+        dismissProgressDialog()
 
         filename = "${externalCacheDir?.absolutePath}/result.3gp"
         timer = Timer(this)
@@ -70,21 +80,26 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
         binding.analyzeButton.alpha = 0.3f
 
         binding.analyzeButton.setOnClickListener {
-            uploadAudioFile(binding.sentence.text.toString())
+            uploadAudioFile(feedbackType, binding.sentence.text.toString())
+            showProgressDialog()
         }
 
         binding.backButton.setOnClickListener {
             finish()
         }
 
-        viewModel.feedback.observe(this) {
-            val intent = Intent(this, FeedbackActivity::class.java).apply {
+        viewModel.pronunciationFeedback.observe(this) {
+            val intent = Intent(this, PronunciationFeedbackActivity::class.java).apply {
                 putExtra("feedbackData", it)
             }
             startActivity(intent)
         }
 
+        // TODO: 억양 피드백 페이지로 이동
+        viewModel.intonationFeedback.observe(this) {}
+
         viewModel.errorMessage.observe(this) { message ->
+            dismissProgressDialog()
             AlertDialog.Builder(this)
                 .setMessage("$message\n다시 시도해주세요.")
                 .setPositiveButton("확인") { _, _ -> }
@@ -233,7 +248,7 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
         binding.waveformView.addAmplitude(recorder?.maxAmplitude?.toFloat() ?: 0f)
     }
 
-    private fun uploadAudioFile(textSentence: String) {
+    private fun uploadAudioFile(feedbackType: FeedbackType?, textSentence: String) {
         val file = File(filename)
         if (!file.exists()) {
             return
@@ -243,6 +258,24 @@ class RecordActivity : AppCompatActivity(), OnTimerTickListener {
         val requestFile = file.asRequestBody("audio/3gp".toMediaTypeOrNull())
         val audioPart = MultipartBody.Part.createFormData("audioFile", file.name, requestFile)
 
-        viewModel.createFeedback(textSentence, audioPart)
+        when (feedbackType) {
+            FeedbackType.PRONUNCIATION -> viewModel.createPronunciationFeedback(textSentence, audioPart)
+            FeedbackType.INTONATION -> viewModel.createIntonationFeedback(IntonationSentenceData.getCodeBySentence(textSentence), audioPart)
+            null -> {}
+        }
+    }
+
+    private fun showProgressDialog() {
+        progressDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 배경을 투명하게
+        progressDialog.setContentView(ProgressBar(this)) // ProgressBar 위젯 생성
+        progressDialog.setCanceledOnTouchOutside(false) // 외부 터치 막음
+//        progressDialog.setOnCancelListener { this.finish() } // 뒤로가기시 현재 액티비티 종료
+        progressDialog.show()
+    }
+
+    private fun dismissProgressDialog() {
+        if (progressDialog.isShowing) {
+            progressDialog.dismiss()
+        }
     }
 }

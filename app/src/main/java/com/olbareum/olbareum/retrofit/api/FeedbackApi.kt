@@ -19,7 +19,7 @@ interface FeedbackApi {
     @Multipart
     @POST("/api/v1/feedback/pronunciation/create-intonation")
     fun createIntonationFeedback(
-        @Part("textSentence") textSentence: String,
+        @Part("textSentence") sentenceCode: String,
         @Part audioFile: MultipartBody.Part
     ): Call<IntonationFeedbackResponseDto>
 }
