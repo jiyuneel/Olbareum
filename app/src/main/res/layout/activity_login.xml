@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_bold"
-            android:text="ID"
+            android:text="E-mail"
             android:textColor="@color/main_color"
             android:textSize="24dp" />
 
