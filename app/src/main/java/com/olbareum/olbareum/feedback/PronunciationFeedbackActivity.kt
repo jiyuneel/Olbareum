@@ -33,7 +33,7 @@ class PronunciationFeedbackActivity : BaseActivity() {
                 FeedbackStatus.CORRECT -> {
                     binding.sentence.text = feedbackData.textSentence
                     binding.transcription.text = feedbackData.textSentence
-                    binding.dotsIndicator.visibility = View.GONE
+                    binding.feedback.visibility = View.GONE
                 }
                 // 발음에 틀린 부분 있음 (피드백&입모양 사진 있음)
                 FeedbackStatus.INCORRECT -> {
@@ -44,6 +44,23 @@ class PronunciationFeedbackActivity : BaseActivity() {
                     binding.sentence.text = feedbackData.textSentence
                     binding.transcription.text = feedbackData.transcription
                     highlightWrongWords(binding.transcription, feedbackData.wordIndex)
+
+                    val feedbackAdapter = FeedbackViewPagerAdapter(
+                        feedbackData.feedbackCount,
+                        feedbackData.pronunciationFeedbacks,
+                        feedbackData.feedbackImageUrls
+                    )
+                    binding.feedbackViewPager.adapter = feedbackAdapter
+                    binding.dotsIndicator.attachTo(binding.feedbackViewPager)
+                }
+                // 단어 개수가 틀림 (피드백 & 입모양 사진 있고, word_index 무시하면 됨)
+                FeedbackStatus.DIFFERENT -> {
+                    val pronunciationScore = feedbackData.pronunciationScore.toInt()
+                    binding.score.text = "${pronunciationScore}점"
+                    binding.scoreBar.progress = pronunciationScore
+
+                    binding.sentence.text = feedbackData.textSentence
+                    binding.transcription.text = feedbackData.transcription
 
                     val feedbackAdapter = FeedbackViewPagerAdapter(
                         feedbackData.feedbackCount,
