@@ -11,30 +11,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="20dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="올발음"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_profile" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="님"
+                android:fontFamily="@font/bely_display_regular"
+                android:text="Olbareum"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="24dp" />
+            <!--            android:text="𝑶𝒍𝒃𝒂𝒓𝒆𝒖𝒎"-->
+
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:fontFamily="@font/pretendard_regular"-->
+            <!--                android:text="님"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="20dp" />-->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -42,48 +51,47 @@
             android:layout_width="20dp"
             android:layout_height="0dp" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/style_radius_stroke_gray2"
-            android:elevation="2dp"
-            android:orientation="horizontal">
+        <!--        <androidx.appcompat.widget.LinearLayoutCompat-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="20dp"-->
+        <!--            android:background="@drawable/style_radius_stroke_gray2"-->
+        <!--            android:elevation="2dp"-->
+        <!--            android:orientation="horizontal">-->
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_round_edit_20"
-                android:drawableTint="@color/yellow5"
-                android:fontFamily="@font/pretendard_medium"
-                android:text="나의 발음 분석"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
+        <!--            <Button-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginHorizontal="16dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:background="@android:color/transparent"-->
+        <!--                android:drawableStart="@drawable/ic_round_edit_20"-->
+        <!--                android:drawableTint="@color/yellow5"-->
+        <!--                android:fontFamily="@font/pretendard_medium"-->
+        <!--                android:text="나의 발음 분석"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:textSize="14dp" />-->
 
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="12dp"
-                app:dividerColor="@color/gray2" />
+        <!--            <com.google.android.material.divider.MaterialDivider-->
+        <!--                android:layout_width="1dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_marginVertical="12dp"-->
+        <!--                app:dividerColor="@color/gray2" />-->
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_round_auto_awesome_20"
-                android:drawableTint="@color/yellow5"
-                android:fontFamily="@font/pretendard_medium"
-                android:text="오늘의 미션 !"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
+        <!--            <Button-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginHorizontal="16dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:background="@android:color/transparent"-->
+        <!--                android:drawableStart="@drawable/ic_round_auto_awesome_20"-->
+        <!--                android:drawableTint="@color/yellow5"-->
+        <!--                android:fontFamily="@font/pretendard_medium"-->
+        <!--                android:text="오늘의 미션 !"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:textSize="14dp" />-->
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -99,7 +107,7 @@
             android:layout_gravity="center_horizontal">
 
             <ImageView
-                android:layout_width="150dp"
+                android:layout_width="170dp"
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_speech_bubble"
@@ -114,7 +122,7 @@
                 android:gravity="center_horizontal"
                 android:text="무엇을\n연습할까요?\n"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="180dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="40dp"
                 android:background="@drawable/style_radius_stroke_gray2"
                 android:elevation="2dp"
                 android:orientation="horizontal">
