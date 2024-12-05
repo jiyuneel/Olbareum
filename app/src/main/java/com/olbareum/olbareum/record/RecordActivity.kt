@@ -20,6 +20,7 @@ import com.olbareum.olbareum.feedback.PronunciationFeedbackActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityRecordBinding
 import com.olbareum.olbareum.enums.FeedbackType
+import com.olbareum.olbareum.feedback.IntonationFeedbackActivity
 import com.olbareum.olbareum.intonation.IntonationSentenceData
 import com.olbareum.olbareum.retrofit.view_model.FeedbackViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -89,14 +90,20 @@ class RecordActivity : BaseActivity(), OnTimerTickListener {
         }
 
         viewModel.pronunciationFeedback.observe(this) {
+            progressDialog.dismiss()
             val intent = Intent(this, PronunciationFeedbackActivity::class.java).apply {
                 putExtra("feedbackData", it)
             }
             startActivity(intent)
         }
 
-        // TODO: 억양 피드백 페이지로 이동
-        viewModel.intonationFeedback.observe(this) {}
+        viewModel.intonationFeedback.observe(this) {
+            progressDialog.dismiss()
+            val intent = Intent(this, IntonationFeedbackActivity::class.java).apply {
+                putExtra("feedbackData", it)
+            }
+            startActivity(intent)
+        }
 
         viewModel.errorMessage.observe(this) { message ->
             dismissProgressDialog()

@@ -14,7 +14,7 @@ data class PronunciationFeedbackResponseDto(
     @SerializedName("textSentence")
     val textSentence: String,                   // 문장
     @SerializedName("status")
-    val status: Int,                            // 1: 정확한 발음 (피드백&입모양 사진 없음), 2: 발음에 틀린 부분 있음 (피드백&입모양 사진 있음)
+    val status: Int,                            // 1: 정확한 발음 (피드백&입모양 사진 없음), 2: 발음에 틀린 부분 있음 (피드백&입모양 사진 있음), 6: 단어 개수가 틀림 (피드백 & 입모양 사진 있음)
     @SerializedName("pronounced_text")
     val pronouncedText: String,                 // 문장을 정확하게 발음했을 때 나와야 하는 문장 ex) 나는 행보카게 끈나는 영화가 조타
     @SerializedName("transcription")

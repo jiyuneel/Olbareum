@@ -20,5 +20,7 @@ data class IntonationFeedbackResponseDto(
     @SerializedName("feedbackImageUrls")
     val feedbackImageUrls: String,
     @SerializedName("intonationScore")
-    val intonationScore: Double
+    val intonationScore: Double,
+    @SerializedName("intonationImageUrls")
+    val intonationImageUrls: String
 ): Parcelable

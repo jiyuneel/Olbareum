@@ -35,13 +35,15 @@ class FeedbackViewModel : ViewModel() {
                         _pronunciationFeedback.value = response.body()
                     } else {
                         // response.errorBody()?.string()을 호출하면 스트림이 소모되어 다시 사용할 수 없음
-//                    Log.e("testt", "${response.code()} ${response.errorBody()?.string()}")
+                        val errorBody = response.errorBody()?.source()?.buffer?.clone()?.readUtf8()
+                        Log.e("testt", "${response.code()} $errorBody")
                         try {
                             val errorResponse =
                                 response.errorBody()?.let { RetrofitService.errorBody.convert(it) }
                             _errorMessage.value = errorResponse?.message
                         } catch (e: Exception) {
                             Log.e("testt", e.toString())
+                            _errorMessage.value = "알 수 없는 오류가 발생했습니다."
                         }
                     }
                 }
@@ -66,13 +68,15 @@ class FeedbackViewModel : ViewModel() {
                         _intonationFeedback.value = response.body()
                     } else {
                         // response.errorBody()?.string()을 호출하면 스트림이 소모되어 다시 사용할 수 없음
-//                    Log.e("testt", "${response.code()} ${response.errorBody()?.string()}")
+                        val errorBody = response.errorBody()?.source()?.buffer?.clone()?.readUtf8()
+                        Log.e("testt", "${response.code()} $errorBody")
                         try {
                             val errorResponse =
                                 response.errorBody()?.let { RetrofitService.errorBody.convert(it) }
                             _errorMessage.value = errorResponse?.message
                         } catch (e: Exception) {
                             Log.e("testt", e.toString())
+                            _errorMessage.value = "알 수 없는 오류가 발생했습니다."
                         }
                     }
                 }

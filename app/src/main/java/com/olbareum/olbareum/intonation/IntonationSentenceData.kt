@@ -52,11 +52,20 @@ object IntonationSentenceData {
         )
     )
 
-    // 역맵을 초기화 시 생성
-    private val reverseMap: Map<String, String> = data.values.flatten().associate { it.second to it.first }
+    // 문장 -> 코드 맵
+    private val sentenceToCodeMap: Map<String, String> = data.values.flatten().associate { it.second to it.first }
 
-    // 주어진 문장에 해당하는 코드를 반환 (문장을 찾지 못하면 null 반환)
+    // 코드 -> 문장 맵
+    private val codeToSentenceMap: Map<String, String> = data.values.flatten().associate { it.first to it.second }
+
+
+    // 주어진 문장에 해당하는 코드를 반환
     fun getCodeBySentence(sentence: String): String {
-        return reverseMap[sentence] ?: ""
+        return sentenceToCodeMap[sentence] ?: ""
+    }
+
+    // 주어진 코드에 해당하는 문장을 반환
+    fun getSentenceByCode(code: String): String {
+        return codeToSentenceMap[code] ?: ""
     }
 }
