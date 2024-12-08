@@ -33,12 +33,42 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/listen_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/waveform_view"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_volume"
+            app:tint="@color/main_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="먼저 들어보세요!"
+            android:textColor="@color/main_color"
+            android:textSize="14dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <TextView
         android:id="@+id/sentence"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/pretendard_medium"
         android:gravity="center_vertical"
         android:text="나는 행복하게 끝나는 영화가 좋다."
@@ -50,11 +80,11 @@
         android:id="@+id/waveform_view"
         android:layout_width="0dp"
         android:layout_height="240dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/gray1"
         app:layout_constraintBottom_toTopOf="@+id/timer_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sentence" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/timer_text_view"
@@ -85,25 +115,25 @@
         android:id="@+id/analyze_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/style_button"
         android:fontFamily="@font/pretendard_bold"
         android:paddingHorizontal="20dp"
-        android:text="발음 분석하러 가기"
+        android:text="발음 분석하기"
         android:textColor="@color/white"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progress_bar"-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="80dp"-->
-<!--        android:visibility="visible"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progress_bar"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="80dp"-->
+    <!--        android:visibility="visible"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

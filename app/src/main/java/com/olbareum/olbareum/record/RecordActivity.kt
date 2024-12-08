@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
@@ -22,6 +23,7 @@ import com.olbareum.olbareum.databinding.ActivityRecordBinding
 import com.olbareum.olbareum.enums.FeedbackType
 import com.olbareum.olbareum.feedback.IntonationFeedbackActivity
 import com.olbareum.olbareum.intonation.IntonationSentenceData
+import com.olbareum.olbareum.pronunciation.PronunciationSentenceData
 import com.olbareum.olbareum.retrofit.view_model.FeedbackViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -47,6 +49,7 @@ class RecordActivity : BaseActivity(), OnTimerTickListener {
     private var filename: String = ""
     private var state: State = State.RELEASE
 
+    private lateinit var mediaPlayer: MediaPlayer
     private lateinit var progressDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +80,22 @@ class RecordActivity : BaseActivity(), OnTimerTickListener {
             }
         }
 
+        when (feedbackType) {
+            FeedbackType.PRONUNCIATION -> {
+                val audioFile = PronunciationSentenceData.getRawResourceIdBySentence(this, sentence)
+                mediaPlayer = MediaPlayer.create(this, audioFile)
+            }
+            FeedbackType.INTONATION -> {
+                val audioFile = IntonationSentenceData.getRawResourceIdBySentence(this, sentence)
+                mediaPlayer = MediaPlayer.create(this, audioFile)
+            }
+            null -> {}
+        }
+
+        binding.listenButton.setOnClickListener {
+            mediaPlayer.start()
+        }
+
         binding.analyzeButton.isEnabled = false
         binding.analyzeButton.alpha = 0.3f
 
@@ -93,6 +112,7 @@ class RecordActivity : BaseActivity(), OnTimerTickListener {
             progressDialog.dismiss()
             val intent = Intent(this, PronunciationFeedbackActivity::class.java).apply {
                 putExtra("feedbackData", it)
+                putExtra("sentence", sentence)
             }
             startActivity(intent)
         }
@@ -101,6 +121,7 @@ class RecordActivity : BaseActivity(), OnTimerTickListener {
             progressDialog.dismiss()
             val intent = Intent(this, IntonationFeedbackActivity::class.java).apply {
                 putExtra("feedbackData", it)
+                putExtra("sentence", sentence)
             }
             startActivity(intent)
         }
