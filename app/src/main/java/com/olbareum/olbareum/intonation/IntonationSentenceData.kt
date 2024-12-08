@@ -1,6 +1,9 @@
 package com.olbareum.olbareum.intonation
 
+import android.content.Context
+
 object IntonationSentenceData {
+
     val data: Map<String, List<Pair<String, String>>> = mapOf(
         "의문문" to listOf(
             Pair("0_0", "요즘도 바빠?"),
@@ -67,5 +70,10 @@ object IntonationSentenceData {
     // 주어진 코드에 해당하는 문장을 반환
     fun getSentenceByCode(code: String): String {
         return codeToSentenceMap[code] ?: ""
+    }
+
+    fun getRawResourceIdByCode(context: Context, code: String): Int {
+        val resourceName = "i$code"
+        return context.resources.getIdentifier(resourceName, "raw", context.packageName)
     }
 }

@@ -1,5 +1,6 @@
 package com.olbareum.olbareum.feedback
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.olbareum.olbareum.BaseActivity
@@ -10,6 +11,7 @@ import com.olbareum.olbareum.retrofit.dto.feedback.IntonationFeedbackResponseDto
 class IntonationFeedbackActivity : BaseActivity() {
 
     private lateinit var binding: ActivityIntonationFeedbackBinding
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +20,7 @@ class IntonationFeedbackActivity : BaseActivity() {
 
         val feedbackData =
             intent.getParcelableExtra<IntonationFeedbackResponseDto>("feedbackData")
+        val sentence = intent.getStringExtra("sentence") ?: ""
 
         if (feedbackData != null) {
             val intonationScore = feedbackData.intonationScore.toInt()
@@ -44,6 +47,13 @@ class IntonationFeedbackActivity : BaseActivity() {
             Glide.with(this)
                 .load(url)
                 .into(binding.feedbackImage)
+        }
+
+        val sentenceCode = IntonationSentenceData.getCodeBySentence(sentence)
+        val audioFile = IntonationSentenceData.getRawResourceIdByCode(this, sentenceCode)
+        mediaPlayer = MediaPlayer.create(this, audioFile)
+        binding.listenButton.setOnClickListener {
+            mediaPlayer.start()
         }
     }
 }
