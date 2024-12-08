@@ -38,7 +38,6 @@ class IntonationFeedbackActivity : BaseActivity() {
                 .load(feedbackData.feedbackImageUrls)
                 .into(binding.feedbackImage)
         } else {
-
             val url = "https://allbareum.s3.ap-northeast-2.amazonaws.com/images/image/0_0.jpg"
             Glide.with(this)
                 .load(url)
@@ -49,8 +48,7 @@ class IntonationFeedbackActivity : BaseActivity() {
                 .into(binding.feedbackImage)
         }
 
-        val sentenceCode = IntonationSentenceData.getCodeBySentence(sentence)
-        val audioFile = IntonationSentenceData.getRawResourceIdByCode(this, sentenceCode)
+        val audioFile = IntonationSentenceData.getRawResourceIdBySentence(this, sentence)
         mediaPlayer = MediaPlayer.create(this, audioFile)
         binding.listenButton.setOnClickListener {
             mediaPlayer.start()

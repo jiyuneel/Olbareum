@@ -24,7 +24,9 @@ class SentenceSelectActivity : BaseActivity() {
         val sentenceData = mutableListOf<String>()
         when (feedbackType) {
             FeedbackType.PRONUNCIATION -> {
-                PronunciationSentenceData.data[pronunciationType]?.let { sentenceData.addAll(it) }
+                PronunciationSentenceData.data[pronunciationType]?.forEach {
+                    sentenceData.add(it.second)
+                }
             }
             FeedbackType.INTONATION -> {
                 IntonationSentenceData.data[intonationType]?.forEach {

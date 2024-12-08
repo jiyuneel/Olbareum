@@ -1,6 +1,7 @@
 package com.olbareum.olbareum.feedback
 
 import android.graphics.Typeface
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -13,11 +14,13 @@ import com.olbareum.olbareum.BaseActivity
 import com.olbareum.olbareum.R
 import com.olbareum.olbareum.databinding.ActivityPronunciationFeedbackBinding
 import com.olbareum.olbareum.enums.FeedbackStatus
+import com.olbareum.olbareum.pronunciation.PronunciationSentenceData
 import com.olbareum.olbareum.retrofit.dto.feedback.PronunciationFeedbackResponseDto
 
 class PronunciationFeedbackActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPronunciationFeedbackBinding
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,7 @@ class PronunciationFeedbackActivity : BaseActivity() {
 
         val feedbackData =
             intent.getParcelableExtra<PronunciationFeedbackResponseDto>("feedbackData")
+        val sentence = intent.getStringExtra("sentence") ?: ""
 
         if (feedbackData != null) {
             when (FeedbackStatus.fromValue(feedbackData.status)) {
@@ -90,6 +94,12 @@ class PronunciationFeedbackActivity : BaseActivity() {
 
             binding.feedbackViewPager.adapter = FeedbackViewPagerAdapter(4, feedbacks, imageUrls)
             binding.dotsIndicator.attachTo(binding.feedbackViewPager)
+        }
+
+        val audioFile = PronunciationSentenceData.getRawResourceIdBySentence(this, sentence)
+        mediaPlayer = MediaPlayer.create(this, audioFile)
+        binding.listenButton.setOnClickListener {
+            mediaPlayer.start()
         }
 
         binding.backButton.setOnClickListener {

@@ -72,8 +72,9 @@ object IntonationSentenceData {
         return codeToSentenceMap[code] ?: ""
     }
 
-    fun getRawResourceIdByCode(context: Context, code: String): Int {
-        val resourceName = "i$code"
+    fun getRawResourceIdBySentence(context: Context, sentence: String): Int {
+        val sentenceCode = getCodeBySentence(sentence)
+        val resourceName = "i$sentenceCode"
         return context.resources.getIdentifier(resourceName, "raw", context.packageName)
     }
 }
