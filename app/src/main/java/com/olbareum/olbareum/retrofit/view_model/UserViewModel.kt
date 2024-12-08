@@ -17,6 +17,9 @@ class UserViewModel : ViewModel() {
     private val _accessToken = MutableLiveData<String>()
     val accessToken: LiveData<String> get() = _accessToken
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> get() = _errorMessage
+
     fun userSignUp(requestDto: UserCreateRequestDto) {
         RetrofitService.userApi.userSignUp(requestDto).enqueue(object : Callback<UserCreateResponseDto> {
             override fun onResponse(
@@ -48,9 +51,18 @@ class UserViewModel : ViewModel() {
                 Log.i("testt", "${call.request()}")
                 if (response.isSuccessful) {
                     Log.d("testt", "${response.code()} ${response.body()}")
+                    _accessToken.value = response.body()?.accessToken
                 } else {
                     val errorBody = response.errorBody()?.source()?.buffer?.clone()?.readUtf8()
                     Log.e("testt", "${response.code()} $errorBody")
+                    try {
+                        val errorResponse =
+                            response.errorBody()?.let { RetrofitService.errorBody.convert(it) }
+                        _errorMessage.value = errorResponse?.message
+                    } catch (e: Exception) {
+                        Log.e("testt", e.toString())
+                        _errorMessage.value = "알 수 없는 오류가 발생했습니다."
+                    }
                 }
             }
 
